@@ -9,7 +9,7 @@
     <script src="js/class/Enemy.js"></script>
 
     <script type="text/javascript">
-  
+
 // 読み込みが終わってから初期化
 window.addEventListener("load", init);
 function init() {
@@ -31,8 +31,22 @@ function init() {
     var player = new Player(stage);
 
     // スコア欄を作成
-    var score = new createjs.Text("", "24px sans-serif", "white");
-    stage.addChild(score);
+    var scoreBoard = new createjs.Text("", "20px sans-serif", "white");
+    scoreBoard.text = "Score:" + String(0);
+    stage.addChild(scoreBoard);
+
+    // レベル欄を作成
+    var levelBoard = new createjs.Text("", "20px sans-serif", "white");
+    levelBoard.text = "level:" + String(1);
+    levelBoard.x = 150;
+    levelBoard.y = 0;
+    stage.addChild(levelBoard);
+    
+    // マウス座標欄を作成
+    var mouseBoard = new createjs.Text("", "10px sans-serif", "white");
+    mouseBoard.x = 0;
+    mouseBoard.y = 30;
+    stage.addChild(mouseBoard);
 
     // タッチ操作も可能にする(iOS,Android向け)
     if (createjs.Touch.isSupported()) {
@@ -48,7 +62,7 @@ function init() {
 
     // クリックした時の処理
     function handleClick(event) {
-        var bullet = new Bullet(stage, player.x, player.y);
+        var bullet = new Bullet(stage, player.x, player.y, player.level);
         bulletList.push(bullet); // 配列に保存
     }
 
@@ -64,7 +78,7 @@ function init() {
         // 60フレームに1回、敵を生成
         if (count % 60 == 0) {
           // 敵を生成
-          var enemy = new Enemy(stage, STAGE_W, STAGE_H);
+          var enemy = new Enemy(stage, STAGE_W, 50);
           enemyList.push(enemy); // 配列に保存
         }
     
@@ -110,10 +124,10 @@ function init() {
     
               // スコアの更新
               scoreNum += 100;
-              score.text = String(scoreNum);
+              player.addExp(100);
               
               // ステージクリア判定
-              if (scoreNum >= 2000) {
+              if (scoreNum >= 10000) {
                 showGameClear();
               }
     
@@ -121,6 +135,12 @@ function init() {
             }
           }
         }
+        
+        // 各テキストの更新
+        scoreBoard.text = "Score:" + String(scoreNum);    
+        levelBoard.text = "Level:" + String(player.getLevel()) + "  Exp:" + String(player.getExp());
+        mouseBoard.text = "Mouse X:" + String(stage.mouseX) + " Y:" + String(stage.mouseY);
+
     
         // ステージの更新
         stage.update();

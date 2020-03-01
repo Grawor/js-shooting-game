@@ -35,7 +35,7 @@ class Enemy extends createjs.Shape{
 
         // 画面上側からランダムに生成
         this.x = stageW * Math.random();
-        this.y = 0;
+        this.y = stageH;
 
         // ステージに追加
         stage.addChild(this); // 画面に表示
