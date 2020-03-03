@@ -25,13 +25,9 @@ class Enemy extends createjs.Shape{
         this.stage = stage;
 
         // 敵の形を定義
-        // this.graphics.beginFill("red").moveTo(-5, 0).lineTo(+20, +15).lineTo(+20, -15).closePath();
         this.graphics.beginFill("red").moveTo(10,-5).lineTo(10,5).lineTo(5,5).lineTo(5,10)
             .lineTo(-5,10).lineTo(-5,5).lineTo(-10,5).lineTo(-10,-5).closePath();
 
-        // 画面右端からランダムに生成
-        // this.x = stageW;
-        // this.y = stageH * Math.random();
 
         // 画面上側からランダムに生成
         this.x = stageW * Math.random();
@@ -49,7 +45,6 @@ class Enemy extends createjs.Shape{
     move() {
 
         // 敵を移動させる。
-        // this.x -= 1;
         this.y += 1;
     }
 

@@ -29,7 +29,7 @@ class Bullet extends createjs.Shape{
         this.level = level;
 
         // 弾の形を定義
-        this.graphics.beginFill("white").drawCircle(0, 0, level * 3);
+        this.graphics.beginFill("white").drawCircle(0, 0, 3);
         // ステージに追加
         stage.addChild(this);
     }
@@ -41,7 +41,6 @@ class Bullet extends createjs.Shape{
     move() {
 
         // 弾を移動させる。
-        // this.x += 10;
         this.y -= 10 + this.level;
     }
 }

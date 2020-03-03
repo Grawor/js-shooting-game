@@ -5,7 +5,7 @@
     
     <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
     <script src="js/class/Player.js"></script>
-    <script src="js/class/Shot.js"></script>
+    <script src="js/class/Bullet.js"></script>
     <script src="js/class/Enemy.js"></script>
 
     <script type="text/javascript">
@@ -62,8 +62,22 @@ function init() {
 
     // クリックした時の処理
     function handleClick(event) {
+      
+      // レベル増加に合わせて弾数増加
+      for (var i = 0; i < player.level; i++) {
         var bullet = new Bullet(stage, player.x, player.y, player.level);
         bulletList.push(bullet); // 配列に保存
+        
+        if (player.level > 1) {
+          var bullet = new Bullet(stage, player.x + i * 10, player.y, player.level);
+          bulletList.push(bullet); // 配列に保存
+        }
+
+        if (player.level > 1) {
+          var bullet = new Bullet(stage, player.x - i * 10, player.y, player.level);
+          bulletList.push(bullet); // 配列に保存
+        }
+      }
     }
 
     // tick イベントの処理
@@ -127,7 +141,7 @@ function init() {
               player.addExp(100);
               
               // ステージクリア判定
-              if (scoreNum >= 10000) {
+              if (scoreNum >= 3000) {
                 showGameClear();
               }
     
