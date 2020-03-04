@@ -57,7 +57,7 @@ function init() {
     stage.addEventListener("click", handleClick);
 
     // tick イベントの登録
-    createjs.Ticker.setFPS(60);
+    createjs.Ticker.framerate = 60; // setFPSは非推奨
     createjs.Ticker.addEventListener("tick", handleTick);
 
     // クリックした時の処理
