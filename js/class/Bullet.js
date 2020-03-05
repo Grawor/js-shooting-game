@@ -4,12 +4,6 @@
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 class Bullet extends createjs.Shape{
 
-    x;      // 弾のX位置
-    y;      // 弾のY位置
-    stage;  // 描写させるステージ
-    
-    level;  // 弾レベル
-
     // getter
     getX() { return this.x; }   // X位置を返す。
     getY() { return this.y; }   // Y位置を返す。
@@ -18,20 +12,17 @@ class Bullet extends createjs.Shape{
     // breif : コンストラクタ
     // note  :
     // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-    constructor(stage, x, y, level) {
+    constructor(x, y, level) {
 
         super();    // 親クラスのコンストラクタ呼び出し
 
         this.x = x;
         this.y = y;
-        this.stage = stage;
-        
+
         this.level = level;
 
         // 弾の形を定義
         this.graphics.beginFill("white").drawCircle(0, 0, 3);
-        // ステージに追加
-        stage.addChild(this);
     }
     
     // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----

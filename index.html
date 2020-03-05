@@ -8,7 +8,7 @@
     <script src="js/class/Bullet.js"></script>
     <script src="js/class/Enemy.js"></script>
 
-    <script type="text/javascript">
+    <script>
 
 // 読み込みが終わってから初期化
 window.addEventListener("load", init);
@@ -28,7 +28,8 @@ function init() {
     stage.addChild(bg);
 
     // 自機を作成
-    var player = new Player(stage);
+    var player = new Player();
+    stage.addChild(player); // ステージに追加
 
     // スコア欄を作成
     var scoreBoard = new createjs.Text("", "20px sans-serif", "white");
@@ -65,17 +66,20 @@ function init() {
       
       // レベル増加に合わせて弾数増加
       for (var i = 0; i < player.level; i++) {
-        var bullet = new Bullet(stage, player.x, player.y, player.level);
-        bulletList.push(bullet); // 配列に保存
+        var bullet = new Bullet(player.x, player.y, player.level);
+        stage.addChild(bullet);   // ステージに追加
+        bulletList.push(bullet);  // 配列に保存
         
         if (player.level > 1) {
-          var bullet = new Bullet(stage, player.x + i * 10, player.y, player.level);
-          bulletList.push(bullet); // 配列に保存
+          var bullet = new Bullet(player.x + i * 10, player.y, player.level);
+          stage.addChild(bullet);   // ステージに追加
+          bulletList.push(bullet);  // 配列に保存
         }
 
         if (player.level > 1) {
-          var bullet = new Bullet(stage, player.x - i * 10, player.y, player.level);
-          bulletList.push(bullet); // 配列に保存
+          var bullet = new Bullet(player.x - i * 10, player.y, player.level);
+          stage.addChild(bullet);   // ステージに追加
+          bulletList.push(bullet);  // 配列に保存
         }
       }
     }
@@ -84,7 +88,7 @@ function init() {
     function handleTick() {
 
         // 自機をマウス座標まで移動させる(減速で移動)
-        player.move();
+        player.move(stage);
 
         // フレーム番号を更新(インクリメント)
         count = count + 1;
@@ -92,8 +96,9 @@ function init() {
         // 60フレームに1回、敵を生成
         if (count % 60 == 0) {
           // 敵を生成
-          var enemy = new Enemy(stage, STAGE_W, 50);
-          enemyList.push(enemy); // 配列に保存
+          var enemy = new Enemy(STAGE_W, 50);
+          stage.addChild(enemy);   // ステージに追加
+          enemyList.push(enemy);  // 配列に保存
         }
     
         // 発射弾の移動処理

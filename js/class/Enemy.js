@@ -4,10 +4,6 @@
 // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
 class Enemy extends createjs.Shape{
 
-    x;      // 敵のX位置
-    y;      // 敵のY位置
-    stage;  // 描写させるステージ
-
     // getter
     getX() { return this.x; }   // X位置を返す。
     getY() { return this.y; }   // Y位置を返す。
@@ -16,13 +12,12 @@ class Enemy extends createjs.Shape{
     // breif : コンストラクタ
     // note  :
     // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-    constructor(stage, stageW, stageH) {
+    constructor(stageW, stageH) {
 
         super();    // 親クラスのコンストラクタ呼び出し
 
         this.x = 0;
         this.y = 0;
-        this.stage = stage;
 
         // 敵の形を定義
         this.graphics.beginFill("red").moveTo(10,-5).lineTo(10,5).lineTo(5,5).lineTo(5,10)
@@ -32,10 +27,6 @@ class Enemy extends createjs.Shape{
         // 画面上側からランダムに生成
         this.x = stageW * Math.random();
         this.y = stageH;
-
-        // ステージに追加
-        stage.addChild(this); // 画面に表示
-        // enemyList.push(this); // 配列に保存
     }
     
     // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
