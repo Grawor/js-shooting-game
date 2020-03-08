@@ -14,7 +14,7 @@ class Player extends createjs.Shape{
     // breif : コンストラクタ
     // note  :
     // ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----
-    constructor(stage) {
+    constructor() {
 
         super();    // 親クラスのコンストラクタ呼び出し
 
